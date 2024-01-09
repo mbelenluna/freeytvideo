@@ -1,0 +1,17 @@
+{% extends "index.html" %}
+
+{% block main %}
+
+    <form action="/download" method="POST">
+        <label for="link">Insert the link of the YouTube video you would like to download below. <br>Download will begin automatically in a few seconds.</label>
+        <input type="url" id="link" name="link" required>
+        <button id="downloadButton" type="submit" value="submit" class="submit">Download</button>
+
+        {% if error %}
+            <div class="error">
+                {{ error }}
+            </div>
+        {% endif %}
+    </form>
+
+{% endblock %}

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="../static/style.css">
+
+    <title>YouTube Video Downloader - FreeYTVideo</title>
+</head>
+
+<body>
+    <header>
+        <button class="switch">Switch to light mode</button>
+        <div class="header-container">
+
+            <h1>Free YouTube Video Downloader</h1>
+            <h3>Downloading YouTube videos and shorts has never been easier</h3>
+        </div>
+    </header>
+
+    <div class="instructions">
+        <p>Download any YouTube video or short fast and safely. Just paste the link of the video and hit Submit. The
+            video will be automatically downloaded (no additional steps!). This tool is completely free and safe to use.
+        </p>
+    </div>
+    <main class="downloader">
+        {% block main %}{% endblock %}
+    </main>
+
+    {% if error %}
+    <script>
+        alert("{{ error }}");
+    </script>
+    {% endif %}
+
+    <footer id="footer">
+        <p>
+            Developed and designed by María Belén Luna
+        </p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const switchButton = document.querySelector('.switch');
+            const body = document.body;
+            const instructions = document.querySelector('.instructions');
+            const downloader = document.querySelector('.downloader');
+            const footer = document.getElementById("footer")
+
+            switchButton.addEventListener('click', function () {
+                // Toggle 'light-theme' class on the body
+                body.classList.toggle('light-theme');
+
+                // Update button text based on the theme
+                switchButton.innerText = body.classList.contains('light-theme') ?
+                    'Change to Dark Theme' : 'Change to Light Theme';
+
+                // Update font color of elements based on the theme
+                const textColor = body.classList.contains('light-theme') ? 'black' : 'white';
+                instructions.style.color = textColor;
+                downloader.style.color = textColor;
+                footer.style.color = textColor;
+            });
+        });
+    </script>
+
+</body>
+
+</html>

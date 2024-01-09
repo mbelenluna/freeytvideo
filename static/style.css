@@ -1,0 +1,203 @@
+@font-face {
+    font-family: standard;
+    src: url(InterTight-Medium.ttf);
+}
+
+@font-face {
+    font-family: titles;
+    src: url(InterTight-ExtraBold.ttf);
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: standard;
+    background-color: black;
+    transition: background-color 0.5s;
+}
+
+body.light-theme {
+    background-color: white;
+}
+
+.light-theme .instructions,
+.light-theme .downloader {
+    color: black;
+}
+
+h1 {
+    font-size: 50px;
+    margin-bottom: 0;
+}
+
+header {
+    color: white;
+    font-family: titles;
+    background-image: url(SL-121019-25870-23.jpg);
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+}
+
+.header-container {
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    flex-direction: column;
+    margin-left: 5rem;
+    height: 70vh;
+}
+
+.switch {
+    align-self: flex-end;
+    /* Align the button to the end (top-right) of the container */
+    font-size: 15px;
+    margin-top: 1rem;
+    /* Add some top margin for separation */
+    margin-right: 1rem;
+    /* Add some right margin for separation */
+    padding: 10px;
+    /* Add padding for better appearance */
+    background-color: white;
+    /* Your button background color */
+    color: black;
+    /* Your button text color */
+    border: none;
+    /* Remove border */
+    cursor: pointer;
+    /* Add cursor pointer for interaction */
+    border-radius: 8px;
+    /* Add rounded edges */
+    transition: background-color 0.3s;
+    /* Smooth transition on hover */
+}
+
+.switch:hover {
+    background-color: #002D52;
+    /* Change color on hover */
+    color: white;
+}
+
+.switch:active {
+    background-color: black;
+    /* Change color when clicked */
+    color: white;
+}
+
+.instructions {
+    padding: 3rem;
+    font-size: 20px;
+    text-align: center;
+    color: white;
+    transition: color 0.5s;
+}
+
+.downloader::before {
+    content: "";
+    display: block;
+    border-top: 1px solid grey;
+    width: 56%;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+label {
+    text-align: center;
+}
+
+.downloader {
+    padding: 3rem;
+    font-size: 30px;
+    color: white;
+    position: relative;
+    transition: color 0.5s;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+input {
+    height: 1.7rem;
+    width: 40rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    font-family: standard;
+    border: 1px grey solid;
+}
+
+#downloadButton {
+    font-family: standard;
+    background-color: #0075D4;
+    color: white;
+    font-size: 30px;
+    padding: 10px 20px;
+    /* Adjust padding as needed */
+    border-radius: 8px;
+    /* Add rounded edges */
+    transition: background-color 0.3s;
+    /* Smooth transition on hover */
+    cursor: pointer;
+    /* Set cursor to pointer on hoverable elements */
+    border: none;
+    /* Remove default button border */
+}
+
+#downloadButton:hover {
+    background-color: #002D52;
+    /* Change color on hover */
+}
+
+#downloadButton:active {
+    background-color: black;
+    /* Change color when clicked */
+}
+
+#footer {
+    position: relative;
+    padding: 15px;
+    font-family: standard;
+    text-align: center;
+    color: white;
+}
+
+#footer::before {
+    content: "";
+    display: block;
+    border-top: 1px solid grey;
+    width: 7rem;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* Responsiveness */
+
+@media only screen and (max-width: 750px) {
+    input {
+        width: 90%;
+        /* Adjusted width for screens smaller than 750px */
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    input {
+        width: 95%;
+        /* Further adjusted width for screens smaller than 600px */
+    }
+}
+
+@media only screen and (max-width: 682px) {
+    .header-container {
+        margin-left: 1.5rem;
+        /* Adjusted margin-left for screens smaller than 682px */
+        margin-right: 1.5rem;
+        /* Adjusted margin-right for screens smaller than 682px */
+        height: 40vh;
+    }
+}
