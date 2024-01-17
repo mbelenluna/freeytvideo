@@ -12,8 +12,8 @@ body {
     margin: 0;
     padding: 0;
     font-family: standard;
-    background-color: black;
-    transition: background-color 0.5s;
+    background-image: url(background2.png);
+    background-size: cover;
 }
 
 body.light-theme {
@@ -31,32 +31,26 @@ h1 {
 }
 
 header {
+    display: grid;
+    grid-template-columns: repeat(9,fr);
+    grid-template-rows: 1fr;
+    grid-template-areas: "logo . . . . . . . switch";
     color: white;
     font-family: titles;
-    background-image: url(SL-121019-25870-23.jpg);
-    background-size: cover;
-    display: flex;
-    flex-direction: column;
 }
 
-.header-container {
-    display: flex;
-    justify-content: center;
-    align-items: start;
-    flex-direction: column;
-    margin-left: 5rem;
-    height: 70vh;
+.red {
+    color: red;
 }
 
 .switch {
-    align-self: flex-end;
+    grid-area: switch;
     /* Align the button to the end (top-right) of the container */
     font-size: 15px;
     margin-top: 1rem;
+    margin-left: 1rem;
     /* Add some top margin for separation */
-    margin-right: 1rem;
-    /* Add some right margin for separation */
-    padding: 10px;
+    padding: 0.5rem;
     /* Add padding for better appearance */
     background-color: white;
     /* Your button background color */
@@ -70,7 +64,21 @@ header {
     /* Add rounded edges */
     transition: background-color 0.3s;
     /* Smooth transition on hover */
+    max-width: 170px;
 }
+
+.logo {
+    grid-column: 2 / 12;
+    justify-self: center;
+    margin-left: 1rem;
+    grid-area: logo;
+    /* Align the button to the end (top-right) of the container */
+    font-size: 15px;
+    margin-top: 1rem;
+    /* Your button background color */
+    color: white;
+}
+
 
 .switch:hover {
     background-color: #002D52;
@@ -84,12 +92,22 @@ header {
     color: white;
 }
 
+.logo {
+    border-radius: 3rem;
+    width: 30%;
+}
+
 .instructions {
-    padding: 3rem;
-    font-size: 20px;
+    grid-area: center;
+    padding: 2rem;
+    font-size: 16px;
     text-align: center;
     color: white;
     transition: color 0.5s;
+    background: linear-gradient(to bottom, black, #333);
+    background-size: cover;
+    border-radius: 3rem;
+    transition: background 0.3s ease-in-out;
 }
 
 .downloader::before {
@@ -108,11 +126,15 @@ label {
 }
 
 .downloader {
+    margin: 1rem;
     padding: 3rem;
     font-size: 30px;
     color: white;
-    position: relative;
     transition: color 0.5s;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr;
+    grid-template-areas: ". center .";
 }
 
 form {
@@ -129,6 +151,7 @@ input {
     font-family: standard;
     border: 1px grey solid;
 }
+
 
 #downloadButton {
     font-family: standard;

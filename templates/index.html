@@ -5,6 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="../favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../favicon/favicon-16x16.png">
+    <link rel="manifest" href="../favicon/site.webmanifest">
+
     <link rel="stylesheet" href="../static/style.css">
 
     <title>YouTube Video Downloader - FreeYTVideo</title>
@@ -12,21 +18,23 @@
 
 <body>
     <header>
-        <button class="switch">Switch to light mode</button>
-        <div class="header-container">
-
-            <h1>Free YouTube Video Downloader</h1>
-            <h3>Downloading YouTube videos and shorts has never been easier</h3>
+        <div class="logo">
+            <p>Free<span class="red">YT</span>Downloader</p>
         </div>
+        <button class="switch">Switch to light theme</button>
     </header>
 
-    <div class="instructions">
-        <p>Download any YouTube video or short fast and safely. Just paste the link of the video and hit Submit. The
-            video will be automatically downloaded (no additional steps!). This tool is completely free and safe to use.
-        </p>
-    </div>
+
     <main class="downloader">
-        {% block main %}{% endblock %}
+        <div class="instructions">
+            <img class="logo" src="../static/logo.png" alt="">
+            <p>Download any YouTube video or short fast and safely. The
+                video will be automatically downloaded (no additional steps!). This tool is completely free and safe to
+                use.
+            </p>
+
+            {% block main %}{% endblock %}
+        </div>
     </main>
 
     {% if error %}
@@ -42,26 +50,59 @@
     </footer>
 
     <script>
+        document.getElementById("downloadButton").addEventListener("click", function (event) {
+            event.preventDefault(); // Prevent default form submission
+            this.disabled = true; // Disable the button
+            this.textContent = "Downloading..."; // Change button text
+
+            // Submit the form using JavaScript
+            fetch("/download", {
+                    method: "POST",
+                    body: new FormData(document.querySelector("form"))
+                })
+                .then(response => response.blob()) // Get the downloaded video as a Blob
+                .then(blob => {
+                    // Trigger browser download
+                    const url = URL.createObjectURL(blob);
+                    const link = document.createElement("a");
+                    link.href = url;
+                    link.download = "video.mp4"; // Set filename for download
+                    link.click();
+                })
+                .finally(() => {
+                    // Reset button text and enable it
+                    this.textContent = "Download";
+                    this.disabled = false;
+                });
+        });
+    </script>
+
+    <script>
         document.addEventListener('DOMContentLoaded', function () {
             const switchButton = document.querySelector('.switch');
             const body = document.body;
             const instructions = document.querySelector('.instructions');
             const downloader = document.querySelector('.downloader');
-            const footer = document.getElementById("footer")
 
             switchButton.addEventListener('click', function () {
                 // Toggle 'light-theme' class on the body
                 body.classList.toggle('light-theme');
+                instructions.classList.toggle('light-theme');
 
                 // Update button text based on the theme
                 switchButton.innerText = body.classList.contains('light-theme') ?
-                    'Change to Dark Theme' : 'Change to Light Theme';
+                    'Switch to Dark Theme' : 'Switch to Light Theme';
 
-                // Update font color of elements based on the theme
+                // Update font color and background color of elements based on the theme
                 const textColor = body.classList.contains('light-theme') ? 'black' : 'white';
+                const backgroundColor = instructions.classList.contains('light-theme') ?
+                    'linear-gradient(to bottom, white, #f5f5f5)' : // Gradient for light theme
+                    'linear-gradient(to bottom, black, #333)'; // Gradient for dark theme
+
                 instructions.style.color = textColor;
+                instructions.style.background = backgroundColor; // Set background for instructions
                 downloader.style.color = textColor;
-                footer.style.color = textColor;
+
             });
         });
     </script>
